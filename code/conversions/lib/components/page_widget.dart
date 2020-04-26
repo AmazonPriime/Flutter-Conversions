@@ -8,6 +8,9 @@ class PageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return child;
+    return Container(
+      padding: EdgeInsets.only(left: 20, right: 20),
+      child: SingleChildScrollView(child: child)
+    );
   }
 }

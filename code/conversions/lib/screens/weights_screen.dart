@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Weights extends StatefulWidget {
-  static final String title = 'Weights';
+class Weight extends StatefulWidget {
+  static final String title = 'Weight';
 
   @override
-  _WeightsState createState() => _WeightsState();
+  _WeightState createState() => _WeightState();
 }
 
-class _WeightsState extends State<Weights> {
+class _WeightState extends State<Weight> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[],
+    );
   }
 }

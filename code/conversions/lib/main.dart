@@ -30,10 +30,10 @@ class _NavigationManagerState extends State<NavigationManager> {
   String _pageTitle = Home.title;
 
   // list of possible navigation screens
-  static List<PageWidget> _navigationOptions = [
+  final List<PageWidget> _navigationOptions = [
     PageWidget(child: Home(), title: Home.title),
-    PageWidget(child: Lengths(), title: Lengths.title),
-    PageWidget(child: Weights(), title: Lengths.title)
+    PageWidget(child: Length(), title: Length.title),
+    PageWidget(child: Weight(), title: Weight.title)
   ];
 
   // change when new screen is selected
@@ -60,11 +60,11 @@ class _NavigationManagerState extends State<NavigationManager> {
           ),
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.ruler),
-              title: Text('Lengths')
+              title: Text('Length')
           ),
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.weight),
-              title: Text('Weights')
+              title: Text('Weight')
           )
         ],
         currentIndex: _selectedIndex,
