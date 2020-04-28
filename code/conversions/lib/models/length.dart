@@ -1,15 +1,8 @@
-class LengthModel {
-  final String name;
-  final String unit;
-  final String type; // metric or imperial
-  final Function convertFunction;
-
-  double value = 0;
-
-  LengthModel({this.name, this.unit, this.type, this.convertFunction});
-}
-
 class ConversionMethods {
+  static double meterToMeter({double value, bool reverse = false}) {
+    return value;
+  }
+
   static double kilometerToMeter({double value, bool reverse = false}) {
     return !reverse ? value * 1000 : value / 1000;
   }

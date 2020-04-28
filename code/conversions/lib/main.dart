@@ -2,19 +2,25 @@ import 'package:conversions/screens/home_screen.dart';
 import 'package:conversions/screens/lengths_screen.dart';
 import 'package:conversions/screens/weights_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'components/page_widget.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'models/data.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      home: NavigationManager(),
+    return ChangeNotifierProvider(
+      create: (context) => DataBank(),
+      child: MaterialApp(
+        theme: ThemeData.dark(),
+        home: NavigationManager(),
+      ),
     );
   }
 }

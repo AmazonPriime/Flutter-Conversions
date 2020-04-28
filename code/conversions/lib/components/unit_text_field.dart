@@ -1,64 +1,72 @@
-import 'package:conversions/models/length.dart';
+import 'package:conversions/models/measurement.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:conversions/utilities.dart';
 
 class UnitField extends StatefulWidget {
-  final LengthModel length;
+  Measurement measurement;
+  final Function update;
 
-  UnitField(this.length);
+  UnitField({this.measurement, this.update});
 
   @override
   _UnitFieldState createState() => _UnitFieldState();
 }
 
 class _UnitFieldState extends State<UnitField> {
-  TextEditingController _controller;
-
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: '0');
+    widget.measurement.controller = TextEditingController(text: widget.measurement.getValue.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
+        Container(
+          width: 30,
+          child: Text(
+            '${widget.measurement.unit}',
+            style: TextStyle(
+              fontSize: 15,
+            ),
+          ),
+        ),
         Expanded(
           child: TextField(
-            controller: _controller,
+            controller: widget.measurement.controller,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               isDense: true,
-              prefix: Text('${widget.length.unit} '),
               border: OutlineInputBorder(
                 borderSide: BorderSide.none
               )
             ),
             onEditingComplete: () {
-              if (_controller.text.length == 0) {
-                setState(() {
-                  _controller.text = '0';
-                });
+              try {
+                if (widget.measurement.controller.text.length == 0) {
+                  setState(() {
+                    widget.measurement.controller.text = '0.0';
+                  });
+                } else {
+                  widget.update(widget.measurement, double.parse(widget.measurement.controller.text));
+                }
+              } catch (e) {
+                print(e);
               }
               FocusScope.of(context).unfocus();
             },
             onChanged: (newValue) {
-              if (newValue.isEmpty) {
-                setState(() {
-                  _controller.text = '0';
-                });
-              } else {
-                try {
-                  double.parse(_controller.text);
-                  if (_controller.text[0] == '0' && _controller.text.length > 1) {
-                    assert(_controller.text[1] == '.');
-                  }
-                } catch (e) {
-                  _controller.text = reformatDecimal(_controller.text);
+              try {
+                double.parse(widget.measurement.controller.text);
+                if (widget.measurement.controller.text[0] == '0' && widget.measurement.controller.text.length > 1) {
+                  assert(widget.measurement.controller.text[1] == '.');
                 }
+              } catch (e) {
+                print(widget.measurement.controller);
+                widget.measurement.controller.text = reformatDecimal(widget.measurement.controller.text);
               }
             },
           ),
