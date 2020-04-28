@@ -1,13 +1,13 @@
-import 'dart:math';
-
+import 'package:conversions/models/length.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class UnitField extends StatefulWidget {
-  final String unit;
-  final String placeholder;
+import 'package:conversions/utilities.dart';
 
-  UnitField({this.unit, this.placeholder});
+class UnitField extends StatefulWidget {
+  final LengthModel length;
+
+  UnitField(this.length);
 
   @override
   _UnitFieldState createState() => _UnitFieldState();
@@ -22,54 +22,48 @@ class _UnitFieldState extends State<UnitField> {
     _controller = TextEditingController(text: '0');
   }
 
-  String reformatDecimal(String input) {
-    List<String> strDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    bool firstDecimalFound = false;
-    String output;
-    for (int i = 0; i < input.length; i++) {
-      if (strDigits.contains(input[i])) {
-        output += input[i];
-      } else if (input[i] == '.' && !firstDecimalFound) {
-        firstDecimalFound = true;
-        output += input[i];
-      }
-    }
-    return output;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextField(
-              controller: _controller,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                isDense: true,
-                prefix: Text('${widget.unit} '),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none
-                )
-              ),
-              onEditingComplete: () {
-                setState(() {
-                  _controller.text = reformatDecimal(_controller.text);
-                });
-                FocusScope.of(context).unfocus();
-              },
-              onChanged: (newValue) {
-                if (newValue.isEmpty) {
-                  setState(() {
-                    _controller.text = '0';
-                  });
-                }
-              },
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: TextField(
+            controller: _controller,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              isDense: true,
+              prefix: Text('${widget.length.unit} '),
+              border: OutlineInputBorder(
+                borderSide: BorderSide.none
+              )
             ),
+            onEditingComplete: () {
+              if (_controller.text.length == 0) {
+                setState(() {
+                  _controller.text = '0';
+                });
+              }
+              FocusScope.of(context).unfocus();
+            },
+            onChanged: (newValue) {
+              if (newValue.isEmpty) {
+                setState(() {
+                  _controller.text = '0';
+                });
+              } else {
+                try {
+                  double.parse(_controller.text);
+                  if (_controller.text[0] == '0' && _controller.text.length > 1) {
+                    assert(_controller.text[1] == '.');
+                  }
+                } catch (e) {
+                  _controller.text = reformatDecimal(_controller.text);
+                }
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

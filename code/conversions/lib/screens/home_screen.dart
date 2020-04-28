@@ -33,39 +33,6 @@ class _HomeState extends State<Home> {
           style: kBlockTextStyle,
           textAlign: TextAlign.justify,
         ),
-        SizedBox(height: 15),
-        Text(
-          'The 2 Systems',
-          style: kHeadingTextStyle,
-        ),
-        Divider(),
-        Text(
-          'The two main systems of measurement in use today are the Metric system and the Imperial system. '
-          'Most countries use the metric system, some countries use a mixture of the two such as the United Kingdom. '
-          'The United States is the most well known country which still uses the Imperial system.',
-          style: kBlockTextStyle,
-          textAlign: TextAlign.justify,
-        ),
-        SizedBox(height: 15),
-        Text(
-          'The Metric System',
-          style: kHeadingTextStyle,
-        ),
-        Divider(),
-        Text(
-          'Some info on the Metric system to go here.',
-          style: kBlockTextStyle,
-        ),
-        SizedBox(height: 15),
-        Text(
-          'The Imperial System',
-          style: kHeadingTextStyle,
-        ),
-        Divider(),
-        Text(
-          'Some info on the Imperial system to go here.',
-          style: kBlockTextStyle,
-        ),
         SizedBox(height: 20),
       ],
     );
