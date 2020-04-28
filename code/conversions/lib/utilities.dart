@@ -1,4 +1,5 @@
 String reformatDecimal(String input) {
+  if (input.length == 0) { return input; }
   List<String> strDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   bool firstDecimalFound = false;
   String output = '';

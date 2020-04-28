@@ -12,8 +12,6 @@ class DataBank extends ChangeNotifier {
         Measurement(name: 'kilometer', unit: 'km', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.kilometerToMeter),
         Measurement(name: 'centimeter', unit: 'cm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.centimeterToMeter),
         Measurement(name: 'millimeter', unit: 'mm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.millimeterToMeter),
-        Measurement(name: 'micrometer', unit: 'μm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.microMeter),
-        Measurement(name: 'nanometer', unit: 'nm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.nanometerToMeter),
       ],
       System.imperial : [
         Measurement(name: 'mile', unit: 'mi', system: System.imperial, type: Type.length, convertFunction: length.ConversionMethods.mileToMeter),
@@ -28,7 +26,7 @@ class DataBank extends ChangeNotifier {
   };
 
   void updateValue(Measurement measurement, double value) {
-    measurement.setValue(value);
+    measurement.setValue(value, isSelf: true);
     updateOtherValues(measurement);
     notifyListeners();
   }
@@ -41,7 +39,7 @@ class DataBank extends ChangeNotifier {
     for (System system in System.values) {
       if (measurementMap.containsKey(system)) {
         for (Measurement measurement in measurementMap[system]) {
-          measurement.setValue(measurement.convertFunction(value: refValue, reverse: true));
+          measurement.setValue(measurement.convertFunction(value: refValue, reverse: true), isSelf: refMeasurement == measurement ? true : false);
         }
       }
     }

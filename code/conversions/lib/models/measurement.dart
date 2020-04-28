@@ -15,9 +15,11 @@ class Measurement {
   // setter and getter for value
   double get getValue => this._value;
 
-  void setValue(double value) {
+  void setValue(double value, {bool isSelf = false}) {
     this._value = value;
-    this.controller.text = value.toString();
+    if (!isSelf) {
+      this.controller.value = this.controller.value.copyWith(text: value.toStringAsFixed(2));
+    }
   }
 }
 

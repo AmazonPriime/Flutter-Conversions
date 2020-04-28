@@ -37,7 +37,6 @@ class _MeasurementListState extends State<MeasurementList> {
             for (Measurement measurement in measurements[system]) {
               result.add(UnitField(measurement: measurement, update: dataBank.updateValue));
             }
-            result.add(SizedBox(height: 15));
           }
         }
         return Column(

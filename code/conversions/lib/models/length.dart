@@ -15,16 +15,8 @@ class ConversionMethods {
     return !reverse ? value / 1000 : value * 1000;
   }
 
-  static double microMeter({double value, bool reverse = false}) {
-    return !reverse ? value / 1e+6 : value * 1e+6;
-  }
-
-  static double nanometerToMeter({double value, bool reverse = false}) {
-    return !reverse ? value / 1e+9 : value * 1e+9;
-  }
-
   static double mileToMeter({double value, bool reverse = false}) {
-    return !reverse ? value * 1609.34 : value * 1609.34;
+    return !reverse ? value * 1609.34 : value / 1609.34;
   }
 
   static double yardToMeter({double value, bool reverse = false}) {

@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:conversions/utilities.dart';
 
 class UnitField extends StatefulWidget {
-  Measurement measurement;
   final Function update;
+  Measurement measurement;
 
   UnitField({this.measurement, this.update});
 
@@ -18,7 +18,7 @@ class _UnitFieldState extends State<UnitField> {
   @override
   void initState() {
     super.initState();
-    widget.measurement.controller = TextEditingController(text: widget.measurement.getValue.toString());
+    widget.measurement.controller = TextEditingController(text: widget.measurement.getValue.toStringAsFixed(2));
   }
 
   @override
@@ -48,11 +48,11 @@ class _UnitFieldState extends State<UnitField> {
               try {
                 if (widget.measurement.controller.text.length == 0) {
                   setState(() {
-                    widget.measurement.controller.text = '0.0';
+                    widget.measurement.controller.value = widget.measurement.controller.value.copyWith(text: '0.00');
                   });
-                } else {
-                  widget.update(widget.measurement, double.parse(widget.measurement.controller.text));
                 }
+                widget.update(widget.measurement, double.parse(widget.measurement.controller.text));
+                widget.measurement.controller.value = widget.measurement.controller.value.copyWith(text: widget.measurement.getValue.toStringAsFixed(2));
               } catch (e) {
                 print(e);
               }
@@ -65,9 +65,9 @@ class _UnitFieldState extends State<UnitField> {
                   assert(widget.measurement.controller.text[1] == '.');
                 }
               } catch (e) {
-                print(widget.measurement.controller);
-                widget.measurement.controller.text = reformatDecimal(widget.measurement.controller.text);
+                widget.measurement.controller.value = widget.measurement.controller.value.copyWith(text: reformatDecimal(widget.measurement.controller.text));
               }
+              widget.update(widget.measurement, double.parse(widget.measurement.controller.text));
             },
           ),
         ),
