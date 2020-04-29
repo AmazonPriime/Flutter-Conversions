@@ -3,13 +3,14 @@
 import 'package:conversions/models/measurement.dart';
 import 'package:flutter/material.dart';
 import 'length.dart' as length;
+import 'weight.dart' as weight;
 
 class DataBank extends ChangeNotifier {
   Map<Type, Map<System, List<Measurement>>> measurements = {
     Type.length : {
       System.metric : [
-        Measurement(name: 'meter', unit: 'm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.meterToMeter),
         Measurement(name: 'kilometer', unit: 'km', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.kilometerToMeter),
+        Measurement(name: 'meter', unit: 'm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.meterToMeter),
         Measurement(name: 'centimeter', unit: 'cm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.centimeterToMeter),
         Measurement(name: 'millimeter', unit: 'mm', system: System.metric, type: Type.length, convertFunction: length.ConversionMethods.millimeterToMeter),
       ],
@@ -21,7 +22,19 @@ class DataBank extends ChangeNotifier {
       ]
     },
     Type.weight : {
-      // TODO: implement weights
+      System.metric : [
+        Measurement(name: 'kilogram', unit: 'kg', system: System.metric, type: Type.weight, convertFunction: weight.ConversionMethods.kilogramToGram),
+        Measurement(name: 'gram', unit: 'g', system: System.metric, type: Type.weight, convertFunction: weight.ConversionMethods.gramToGram),
+        Measurement(name: 'milligram', unit: 'mg', system: System.metric, type: Type.weight, convertFunction: weight.ConversionMethods.milligramToGram),
+        Measurement(name: 'ton', unit: 't', system: System.metric, type: Type.weight, convertFunction: weight.ConversionMethods.tonToGram),
+      ],
+      System.imperial : [
+        Measurement(name: 'US ton', unit: 'T', system: System.imperial, type: Type.weight, convertFunction: weight.ConversionMethods.USTonToGram),
+        Measurement(name: 'imperial ton', unit: 'iT', system: System.imperial, type: Type.weight, convertFunction: weight.ConversionMethods.imperialTonToGram),
+        Measurement(name: 'stone', unit: 'st', system: System.imperial, type: Type.weight, convertFunction: weight.ConversionMethods.stoneToGram),
+        Measurement(name: 'pound', unit: 'lbs', system: System.imperial, type: Type.weight, convertFunction: weight.ConversionMethods.poundToGram),
+        Measurement(name: 'ounce', unit: 'oz', system: System.imperial, type: Type.weight, convertFunction: weight.ConversionMethods.ounceToGram),
+      ]
     }
   };
 

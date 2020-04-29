@@ -1,3 +1,5 @@
+import 'package:conversions/components/measurement_list.dart';
+import 'package:conversions/models/measurement.dart';
 import 'package:flutter/material.dart';
 
 class Weight extends StatefulWidget {
@@ -10,9 +12,6 @@ class Weight extends StatefulWidget {
 class _WeightState extends State<Weight> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[],
-    );
+    return MeasurementList(Type.weight);
   }
 }
