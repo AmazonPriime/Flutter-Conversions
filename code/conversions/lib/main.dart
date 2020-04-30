@@ -1,5 +1,6 @@
 import 'package:conversions/screens/home_screen.dart';
 import 'package:conversions/screens/lengths_screen.dart';
+import 'package:conversions/screens/volume_screen.dart';
 import 'package:conversions/screens/weights_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,8 @@ class _NavigationManagerState extends State<NavigationManager> {
   final List<PageWidget> _navigationOptions = [
     PageWidget(child: Home(), title: Home.title),
     PageWidget(child: Length(), title: Length.title),
-    PageWidget(child: Weight(), title: Weight.title)
+    PageWidget(child: Weight(), title: Weight.title),
+    PageWidget(child: Volume(), title: Volume.title)
   ];
 
   // change when new screen is selected
@@ -58,6 +60,7 @@ class _NavigationManagerState extends State<NavigationManager> {
       ),
       body: _navigationOptions[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: Color(0xFF1E1E1E),
         items: [
           BottomNavigationBarItem(
@@ -71,6 +74,10 @@ class _NavigationManagerState extends State<NavigationManager> {
           BottomNavigationBarItem(
               icon: Icon(FontAwesomeIcons.weight),
               title: Text('Weight')
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.beer),
+              title: Text('Volume')
           )
         ],
         currentIndex: _selectedIndex,

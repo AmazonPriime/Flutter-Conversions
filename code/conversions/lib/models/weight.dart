@@ -1,37 +1,18 @@
-class ConversionMethods {
-  static double gramToGram({double value, bool reverse = false}) {
-    return value;
-  }
+import 'measurement.dart';
 
-  static double kilogramToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 1000 : value / 1000;
-  }
+class WeightData {
+  static List<Measurement> metric = [
+    Measurement(name: 'ton', unit: 't', baseUnit: 1e6, type: Type.weight),
+    Measurement(name: 'kilogram', unit: 'kg', baseUnit: 1000, type: Type.weight),
+    Measurement(name: 'gram', unit: 'g', baseUnit: 1, type: Type.weight),
+    Measurement(name: 'milligram', unit: 'mg', baseUnit: 1/1000, type: Type.weight),
+  ];
 
-  static double milligramToGram({double value, bool reverse = false}) {
-    return !reverse ? value / 1000 : value * 1000;
-  }
-
-  static double tonToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 1e6 : value / 1e6;
-  }
-
-  static double imperialTonToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 1.016e6 : value / 1.016e6;
-  }
-
-  static double USTonToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 907185 : value / 907185;
-  }
-
-  static double stoneToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 6350 : value / 6350;
-  }
-
-  static double poundToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 454 : value / 454;
-  }
-
-  static double ounceToGram({double value, bool reverse = false}) {
-    return !reverse ? value * 28.35 : value / 28.35;
-  }
+  static List<Measurement> imperial = [
+    Measurement(name: 'imperial ton', unit: 'iT', baseUnit: 1.016e6, type: Type.weight),
+    Measurement(name: 'US ton', unit: 'T', baseUnit: 907185, type: Type.weight),
+    Measurement(name: 'stone', unit: 'st', baseUnit: 6350, type: Type.weight),
+    Measurement(name: 'pound', unit: 'lb', baseUnit: 454, type: Type.weight),
+    Measurement(name: 'ounce', unit: 'oz', baseUnit: 28.35, type: Type.weight),
+  ];
 }
