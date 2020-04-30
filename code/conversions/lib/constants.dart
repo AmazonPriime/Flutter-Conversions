@@ -9,3 +9,5 @@ const kHeadingTextStyle = TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.bold
 );
+
+const kDevURL = 'https://github.com/AmazonPriime/Flutter-Conversions';
